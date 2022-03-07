@@ -4,6 +4,12 @@ const messageForm = document.querySelector("#message");
 
 const socket = new WebSocket(`ws://${window.location.host}`);
 
+
+function makeMessage(type, payload){
+    const msg = {type, payload};
+    return JSON.stringify(msg);
+}
+
 socket.addEventListener("open",() => {
     console.log("Connected to Server ✅ ");
 });
@@ -24,10 +30,6 @@ setTimeout(()=> {
 }, 10000);
 */
 
-function makeMessage(type, payload){
-    const msg = {type, payload};
-    return JSON.stringify(msg);
-}
 function handleSubmit(event) {
     event.preventDefault();
     const input = messageForm.querySelector("input");
