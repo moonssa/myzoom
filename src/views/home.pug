@@ -9,12 +9,15 @@ html(lang="en")
     body
         header
             h1 Noom 
+            h2 Welcome to Noom world
         main
+            form#nick
+                input(type="text", placeholder="choose a nickname", required)
+                button Save
             ul
-            form
+            form#message
                 input(type="text", placeholder="write a msg", required)
                 button Send 
-            h2 Welcome to Noom world
         script(src="/public/js/app.js")
     
 
