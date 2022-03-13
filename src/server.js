@@ -20,8 +20,9 @@ wsServer.on("connection", (socket) => {
   socket.onAny((event) => {
     console.log(`Socket Event: ${event}`);
   });
-  socket.on("enter_room", (roomName, done) => {
+  socket.on("enter_room", (roomName, nickname, done) => {
     socket.join(roomName);
+    socket["nickname"]=nickname;
     done();
     socket.to(roomName).emit("welcome", socket.nickname);
   });
@@ -29,7 +30,7 @@ wsServer.on("connection", (socket) => {
       socket.rooms.forEach((room) => socket.to(room).emit("bye", socket.nickname));
   });
   socket.on("new_message",(msg,roomName,done)=>{
-      socket.to(roomName).emit("new_message",`${socket.nickname}:${msg}`);
+      socket.to(roomName).emit("new_message",`${socket.nickname}: ${msg}`);
       done();
   });
 
