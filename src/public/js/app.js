@@ -17,9 +17,7 @@ function handleMessageSubmit(event) {
   event.preventDefault();
   const input = room.querySelector("#msg input");
   const value = input.value;
-  socket.emit("new_message", value, roomName, ()=> {
-      addMessage(`You: ${value}`);
-  });
+  socket.emit("new_message", value, roomName, addMessage(`You: ${value}`));
   input.value = "";
 }
 function handleNicknameSubmit(event) {
