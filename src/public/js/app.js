@@ -26,7 +26,7 @@ function handleMessageSubmit(event) {
 
 
 function showRoom() {
-  welcome.hidden = true;
+  form.hidden = true;
   room.hidden = false;
   h3 = room.querySelector("h3");
   h3.innerText = `Room :  ${roomName}`;
@@ -63,6 +63,17 @@ socket.on("bye", (user) => {
 });
 
 socket.on("new_message", addMessage);
+
+socket.on("roomState_change", (rooms)=> {
+  const roomList = document.querySelector("#roomList ul");
+  roomList.innerHTML="";
+  rooms.forEach((room) => {
+    const li = document.createElement("li");
+    li.innerText = room;
+    roomList.append(li);
+  });
+});
+
 
 
 

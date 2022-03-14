@@ -53,3 +53,10 @@ socket.on("enter_room", (msg, done) => {
 5. 서버측 :
 ```
 socket.join(room name)
+```
+
+Adapter
+서버들 사이에서 실시간으로 어플리케이션을 동기화 한다.
+
+room id 가 sid에 존재하면 프라이빗용 room을 의미.
+room id 가 sid에 존재하지 않으면  퍼블릭용 room을 의미.
