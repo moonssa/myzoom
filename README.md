@@ -1,7 +1,15 @@
 # Noom
 
 Zoom Clone using NodeJS, WebRTC and Websockets.
->npm init -y  
+
+서버셋업
+
+>npm init -y  (터미널에서)
+
+vscode 실행
+packageJson 파일 수정
+
+
 >npm i nodemon -D
 >npm i @babel/core -D
 >npm i @babel/cli -D 
@@ -18,7 +26,7 @@ https://socket.io/docs/v4/
 서버에 설치.
 >npm i socket.io 
 클라이언트에도 설치
->script(src="/so
+>script(src="/socket.io/socket.io.js")
 
 1. 서버측 : 커넥션을 받을 준비
 ```
