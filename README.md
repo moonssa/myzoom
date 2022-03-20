@@ -68,3 +68,6 @@ Adapter
 
 room id 가 sid에 존재하면 프라이빗용 room을 의미.
 room id 가 sid에 존재하지 않으면  퍼블릭용 room을 의미.
+
+https://socket.io/docs/v4/admin-ui/
+npm i @socket.io/admin-ui
