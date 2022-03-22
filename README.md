@@ -18,6 +18,23 @@ packageJson 파일 수정
 >npm i @babel/preset-env -D
 >npm i express  
 
+
+        < HTTP/ WebSocket protocol 차이점 >
+
+|HTTP                    |     WebSocket     |
+|:--:|:--:|
+|request 보내고 response 받으면 stateless 상태 | connection 상태 유지 됨|
+|client 에서만 request 가능 | connection이 유지된 상태이기때문에 sever측에서도 request가능|
+|real time <br>❌| real time<br> ✅|
+
+![](img/http-websocket.png)
+
+websocket 사용법
+1. npm i ws
+
+    
+
+
 # socket IO
 
 https://socket.io/docs/v4/

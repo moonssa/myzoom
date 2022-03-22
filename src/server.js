@@ -12,6 +12,7 @@ app.use("/public", express.static(__dirname + "/public"));
 app.get("/", (req, res) => res.render("home"));
 app.get("/*", (req, res) => res.redirect("/"));
 
+
 const handleListen = () => console.log(`listening on http://localhost:3000`);
 
 const httpServer = http.createServer(app);
@@ -46,63 +47,12 @@ function countRoom(roomName) {
 }
 
 wsServer.on("connection", (socket) => {
-  socket["nickname"] = "Anon";
-  wsServer.sockets.emit("roomState_change", publicRooms());
-  socket.onAny((event) => {
-    console.log(wsServer.sockets.adapter);
-    console.log(`Socket Event: ${event}`);
-  });
-  socket.on("enter_room", (roomName, nickname, done) => {
-    socket.join(roomName);
-    socket["nickname"] = nickname;
+  socket.on("join_room",(roomName, done)=> {
+    socket.join(roomName);  
     done();
-    socket.to(roomName).emit("welcome", socket.nickname, countRoom(roomName));
-    wsServer.sockets.emit("roomState_change", publicRooms());
-  });
-
-  socket.on("disconnecting", () => {
-    socket.rooms.forEach((room) =>
-      socket.to(room).emit("bye", socket.nickname, countRoom(room) - 1)
-    );
-  });
-
-  socket.on("disconnect", () => {
-    wsServer.sockets.emit("roomState_change", publicRooms());
-  });
-
-  socket.on("new_message", (msg, roomName, done) => {
-    socket.to(roomName).emit("new_message", `${socket.nickname}: ${msg}`);
-    done();
-  });
-
-  socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
-});
-/*
-const sockets = [];
-
-wss.on("connection", (socket) => {
-  sockets.push(socket);
-  socket["nickname"] = "Ananymos";
-
-  console.log("Connected to Browser  ✅ ");
-
-  socket.on("close", () => console.log("Disconnected from Browser ❌"));
-  socket.on("message", (msg) => {
-    const message = JSON.parse(msg);
-    console.log(message);
-    switch (message.type) {
-      case "new_message":
-        sockets.forEach((aSocket) =>
-          aSocket.send(`${socket.nickname}: ${message.payload}`)
-        );
-        break;
-      case "nickname":
-        socket["nickname"] = message.payload;
-        break;
-    }
+    socket.to(roomName).emit("welcome");
   });
 });
 
-*/
 
 httpServer.listen(3000, handleListen);
